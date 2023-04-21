@@ -1,13 +1,10 @@
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
-
 import java.time.Duration;
-
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$x;
@@ -23,7 +20,6 @@ class DeliveryTest {
     @Test
     @DisplayName("Should successful plan and replan meeting")
     void shouldSuccessfulPlanAndReplanMeeting() {
-        Configuration.holdBrowserOpen = true;
         Data.UserInfo validUser = Data.Registration.generateUser("Ru");
         int daysToAddForFirstMeeting = 5;
         String firstMeetingDate = Data.generateDate(daysToAddForFirstMeeting);
