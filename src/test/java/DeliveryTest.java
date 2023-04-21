@@ -23,7 +23,6 @@ class DeliveryTest {
     @Test
     @DisplayName("Should successful plan and replan meeting")
     void shouldSuccessfulPlanAndReplanMeeting() {
-        Configuration.holdBrowserOpen = true;
         Data.UserInfo validUser = Data.Registration.generateUser("Ru");
         int daysToAddForFirstMeeting = 5;
         String firstMeetingDate = Data.generateDate(daysToAddForFirstMeeting);
