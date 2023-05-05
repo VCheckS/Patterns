@@ -1,8 +1,8 @@
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
 import java.time.Duration;
 import static com.codeborne.selenide.Selectors.byText;
@@ -11,10 +11,17 @@ import static com.codeborne.selenide.Selenide.$x;
 
 class DeliveryTest {
 
+    @BeforeAll
+    static void setUPAll() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+    }
     @BeforeEach
-    void setup() {
+     void setup() {
         open("http://localhost:9999");
-
+    }
+    @AfterAll
+    static void cleanUp() {
+        SelenideLogger.removeListener("AllureSelenide");
     }
 
     @Test
