@@ -11,6 +11,7 @@ import org.openqa.selenium.Keys;
 import util.ScreenShooterReportPortalExtension;
 
 import java.time.Duration;
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$x;
@@ -42,7 +43,7 @@ class DeliveryTest {
         $("[data-test-id=phone] input").setValue(validUser.getPhone());
         logInfo("В поле ввода телефон введено: " + validUser.getPhone());
         $("[data-test-id=agreement]").click();
-        logInfo("клик по соглашению: " );
+        logInfo("клик по соглашению: ");
         SelenideElement button = $x("//*[contains(text(), 'Запланировать')]");
         button.click();
         $(byText("Успешно!")).shouldBe(Condition.visible, Duration.ofSeconds(15));
@@ -57,7 +58,7 @@ class DeliveryTest {
         $("[data-test-id='replan-notification'] .notification__content")
                 .shouldHave(Condition.text("У вас уже запланирована встреча на другую дату. Перепланировать?"))
                 .shouldBe(Condition.visible);
-        logInfo("Уведомление о уже запланированной встрече" );
+        logInfo("Уведомление о уже запланированной встрече");
         $(byText("Перепланировать")).click();
         $(byText("Успешно!")).shouldBe(Condition.visible, Duration.ofSeconds(15));
         $("[data-test-id='success-notification'] .notification__content").shouldHave(Condition.exactText("Встреча успешно запланирована на " + secondMeetingDate))
@@ -65,6 +66,7 @@ class DeliveryTest {
         logInfo("Успешно перепланирована встреча на " + secondMeetingDate);
 
     }
+
     @Test
     @DisplayName("Should fail")
     void shouldFail() {
@@ -82,27 +84,18 @@ class DeliveryTest {
         $("[data-test-id=phone] input").setValue(validUser.getPhone());
         logInfo("В поле ввода телефон введено: " + validUser.getPhone());
         $("[data-test-id=agreement]").click();
-        logInfo("клик по соглашению: " );
+        logInfo("клик по соглашению: ");
         SelenideElement button = $x("//*[contains(text(), 'Запланировать')]");
         button.click();
+        logInfo("Ошибка валидации поля Имя");
+
         $(byText("Успешно!")).shouldBe(Condition.visible, Duration.ofSeconds(15));
         $("[data-test-id='success-notification'] .notification__content").shouldHave(Condition.exactText("Встреча успешно запланирована на " + firstMeetingDate))
                 .shouldBe(Condition.visible);
         logInfo("Появилось сообщение об успешно запланированной встрече на " + firstMeetingDate);
         $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME, Keys.BACK_SPACE));
         logInfo("Стерились значения первой планируемой даты ");
-        $("[data-test-id=date] input").setValue(secondMeetingDate);
-        logInfo("В поле дата введена вторая дата: " + secondMeetingDate);
-        $x("//*[contains(text(), 'Запланировать')]").click();
-        $("[data-test-id='replan-notification'] .notification__content")
-                .shouldHave(Condition.text("У вас уже запланирована встреча на другую дату. Перепланировать?"))
-                .shouldBe(Condition.visible);
-        logInfo("Уведомление о уже запланированной встрече" );
-        $(byText("Перепланировать")).click();
-        $(byText("Успешно!")).shouldBe(Condition.visible, Duration.ofSeconds(15));
-        $("[data-test-id='success-notification'] .notification__content").shouldHave(Condition.exactText("Встреча успешно запланирована на " + secondMeetingDate))
-                .shouldBe(Condition.visible);
-        logInfo("Успешно перепланирована встреча на " + secondMeetingDate);
+
 
     }
 }
