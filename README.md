@@ -1,2 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/l0r5jupiv989su3x?svg=true)](https://ci.appveyor.com/project/VCheckS/patterns)
-
+1. Установить docker на PC
+2. Пройти регистрацию на сайте https://www.docker.com/
+3. В терминале в IntelijiIdea ввести команду "docker-compose up". Дождаться загрузки и запуска всех контейнеров.
+4. 

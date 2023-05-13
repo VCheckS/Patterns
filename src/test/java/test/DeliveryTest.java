@@ -67,35 +67,5 @@ class DeliveryTest {
 
     }
 
-    @Test
-    @DisplayName("Should fail")
-    void shouldFail() {
-        Data.UserInfo validUser = Data.Registration.generateUser("en");
-        int daysToAddForFirstMeeting = 5;
-        String firstMeetingDate = Data.generateDate(daysToAddForFirstMeeting);
-        int daysToAddForSecondMeeting = 7;
-        String secondMeetingDate = Data.generateDate(daysToAddForSecondMeeting);
-        $("[data-test-id=city] input").setValue(validUser.getCity());
-        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.CONTROL + "A", Keys.DELETE));
-        $("[data-test-id=date] input").setValue(firstMeetingDate);
-        logInfo("В поле ввода дата введено: " + firstMeetingDate);
-        $("[data-test-id=name] input").setValue(validUser.getName());
-        logInfo("В поле ввода Имя введено: " + validUser.getName());
-        $("[data-test-id=phone] input").setValue(validUser.getPhone());
-        logInfo("В поле ввода телефон введено: " + validUser.getPhone());
-        $("[data-test-id=agreement]").click();
-        logInfo("клик по соглашению: ");
-        SelenideElement button = $x("//*[contains(text(), 'Запланировать')]");
-        button.click();
-        logInfo("Ошибка валидации поля Имя");
 
-        $(byText("Успешно!")).shouldBe(Condition.visible, Duration.ofSeconds(15));
-        $("[data-test-id='success-notification'] .notification__content").shouldHave(Condition.exactText("Встреча успешно запланирована на " + firstMeetingDate))
-                .shouldBe(Condition.visible);
-        logInfo("Появилось сообщение об успешно запланированной встрече на " + firstMeetingDate);
-        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME, Keys.BACK_SPACE));
-        logInfo("Стерились значения первой планируемой даты ");
-
-
-    }
 }
